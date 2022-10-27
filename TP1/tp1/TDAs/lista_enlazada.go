@@ -1,4 +1,4 @@
-package lista
+package TDAs
 
 type nodoLista[T any] struct {
 	dato      T
