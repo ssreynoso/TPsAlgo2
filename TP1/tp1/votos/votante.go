@@ -13,15 +13,6 @@ const (
 	LISTA_IMPUGNA = 0
 )
 
-// Voto tiene guardada la información de un voto emitido, por cada tipo de voto posible.
-// Por ejemplo, en la posición GOBERNADOR, tendrá guardada la alternativa a Gobernador.
-// Si vale 0, es un voto en blanco.
-// Si Impugnado es 'true', entonces no hay que considerar ninguna de las alterantivas señaladas.
-type Voto struct {
-	VotoPorTipo [CANT_VOTACION]int
-	Impugnado   bool
-}
-
 // Votante modela un votante en nuestro sistema de votación
 type Votante interface {
 

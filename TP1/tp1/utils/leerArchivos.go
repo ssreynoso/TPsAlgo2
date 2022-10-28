@@ -1,11 +1,11 @@
-package main
+package utils
 
 import (
 	"bufio"
 	"fmt"
-	errores "main/errores"
-	sortPackage "main/sort"
-	votos "main/votos"
+	"main/errores"
+	"main/sort"
+	"main/votos"
 	"os"
 	"strconv"
 	"strings"
@@ -34,7 +34,7 @@ func leerArchivo(ruta string, cb func(string) bool) {
 
 	err = s.Err()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintf(os.Stdout, "%s\n", err)
 	}
 }
 
@@ -50,7 +50,7 @@ func validarExistenciaArchivo(ruta string) bool {
 	return true
 }
 
-func ProcesarArchivoBoletas(ruta string) ([]votos.Partido, *errores.ErrorLeerArchivo) {
+func ProcesarArchivoBoletas(ruta string) ([]votos.Partido, error) {
 	if !validarExistenciaArchivo(ruta) {
 		err := new(errores.ErrorLeerArchivo)
 		return nil, err
@@ -75,7 +75,8 @@ func ProcesarArchivoBoletas(ruta string) ([]votos.Partido, *errores.ErrorLeerArc
 	return listaPartidos, nil
 }
 
-func ProcesarArchivoPadrones(ruta string) ([]int, *errores.ErrorLeerArchivo) {
+func ProcesarArchivoPadrones(ruta string) ([]int, error) {
+
 	if !validarExistenciaArchivo(ruta) {
 		err := new(errores.ErrorLeerArchivo)
 		return nil, err
@@ -97,15 +98,33 @@ func ProcesarArchivoPadrones(ruta string) ([]int, *errores.ErrorLeerArchivo) {
 
 	leerArchivo(ruta, agregarPadron)
 
-	listaPadronesString = sortPackage.RadixSort(listaPadronesString, mayorLongitud)
+	listaPadronesString = sort.RadixSort(listaPadronesString, mayorLongitud)
 
 	// Convertimos el array a array de enteros
 	for _, el := range listaPadronesString {
 		elementoConvertido, err := strconv.Atoi(el)
+
 		if err != nil {
-			listaPadronesInt = append(listaPadronesInt, elementoConvertido)
+			break
 		}
+
+		listaPadronesInt = append(listaPadronesInt, elementoConvertido)
 	}
 
 	return listaPadronesInt, nil
+}
+
+func BusquedaBinaria(arreglo []int, target int, ini int, fin int, tipoError error) (int, error) {
+	if fin < ini || len(arreglo) == 0 {
+		err := tipoError
+		return -1, err
+	}
+	mid := int(ini + (fin-ini)/2)
+	if arreglo[mid] > target {
+		return BusquedaBinaria(arreglo, target, ini, mid-1, tipoError)
+	} else if arreglo[mid] < target {
+		return BusquedaBinaria(arreglo, target, mid+1, fin, tipoError)
+	} else {
+		return mid, nil
+	}
 }

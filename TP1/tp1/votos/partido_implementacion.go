@@ -1,5 +1,7 @@
 package votos
 
+import "fmt"
+
 type partidoImplementacion struct {
 	nombre     string
 	candidatos [CANT_VOTACION]string
@@ -24,39 +26,46 @@ func CrearVotosEnBlanco() Partido {
 
 // Recibe un entero, el tipo de voto al que le tengo que sumar uno.
 func (partido *partidoImplementacion) VotadoPara(tipo TipoVoto) {
-
-	existe := verificarTipoVoto(tipo)
-
-	if existe {
-		partido.votos[tipo] += 1
-	}
+	partido.votos[tipo] += 1
 }
 
 // Retorna la cantidad de votos que tiene el tipo de voto solicitado.
 func (partido partidoImplementacion) ObtenerResultado(tipo TipoVoto) string {
-	return ""
+
+	var txtVoto string
+
+	nombrePartido := partido.nombre
+	candidatoPartido := partido.candidatos[tipo]
+	cntVotos := partido.votos[tipo]
+
+	if cntVotos == 0 || cntVotos > 1 {
+		txtVoto = "votos"
+	} else {
+		txtVoto = "voto"
+	}
+
+	txt := fmt.Sprintf("%s - %s: %d %s", nombrePartido, candidatoPartido, cntVotos, txtVoto)
+
+	return txt
 }
 
 // Recibe un entero, el tipo de voto al que le tengo que sumar uno.
 func (blanco *partidoEnBlanco) VotadoPara(tipo TipoVoto) {
-
-	existe := verificarTipoVoto(tipo)
-
-	if existe {
-		blanco.votos[tipo] += 1
-	}
+	blanco.votos[tipo] += 1
 }
 
 func (blanco partidoEnBlanco) ObtenerResultado(tipo TipoVoto) string {
-	return ""
-}
+	var txtVoto string
 
-func verificarTipoVoto(tipoBuscado TipoVoto) bool {
-	tiposValidos := []TipoVoto{PRESIDENTE, GOBERNADOR, INTENDENTE}
-	for _, tipo := range tiposValidos {
-		if tipoBuscado == tipo {
-			return true
-		}
+	cntVotos := blanco.votos[tipo]
+
+	if cntVotos == 0 || cntVotos > 1 {
+		txtVoto = "votos"
+	} else {
+		txtVoto = "voto"
 	}
-	return false
+
+	txt := fmt.Sprintf("Votos en Blanco: %d %s", cntVotos, txtVoto)
+
+	return txt
 }

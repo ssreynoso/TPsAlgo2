@@ -1,12 +1,11 @@
 package sort
 
-import (
-	"main/TDAs"
-)
+import "main/TDAs"
 
 // Este Radix Sort utiliza countingsort con colas internamente
 
 func RadixSort(arreglo []string, longitud int) []string {
+
 	const (
 		CANTIDAD_COUNTING int  = 10
 		POSICION_ASCII    byte = 48
@@ -17,12 +16,16 @@ func RadixSort(arreglo []string, longitud int) []string {
 		character byte
 	)
 
+	// Inicializo todas las colas
+	for i := 0; i < CANTIDAD_COUNTING; i++ {
+		counting[i] = TDAs.CrearColaEnlazada[string]()
+	}
+
 	arregloOrdenado := arreglo
 
 	// longitud = 8
 	for i := (longitud - 1); i >= 0; i-- {
 		for _, el := range arregloOrdenado {
-
 			// Esto entra solo la primera vez porque después todos van a tener len = 8
 			if len(el) < longitud {
 				ceros := ""
@@ -41,9 +44,11 @@ func RadixSort(arreglo []string, longitud int) []string {
 
 		arregloOrdenado = []string{}
 
-		for j := 0; j <= CANTIDAD_COUNTING; i++ {
-			for !counting[j].EstaVacia() {
-				arregloOrdenado = append(arregloOrdenado, counting[j].Desencolar())
+		for j := 0; j < CANTIDAD_COUNTING; j++ {
+			var padron string
+			for !(counting[j].EstaVacia()) {
+				padron = counting[j].Desencolar()
+				arregloOrdenado = append(arregloOrdenado, padron)
 			}
 		}
 	}
