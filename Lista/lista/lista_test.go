@@ -227,8 +227,53 @@ func testInsertarBorrarUltimoConIterador[Type any](t *testing.T, lista TDALista.
 		require.Equal(t, iteradorExterno.VerActual(), iteradorExterno.Siguiente(), "El método siguiente devuelve correctamente el elemento actual antes de avanzar")
 	}
 
+	iteradorExterno = lista.Iterador()
 	// Si inserto a lo último el orden también se respeta
 	for i := 0; i < len(datos); i++ {
 		require.Equal(t, datos[i], iteradorExterno.Borrar(), "Elimino cada ultimo con el iterador")
 	}
+}
+
+func TestInsertarBorrarMedioConIterador(t *testing.T) {
+	listaInt := TDALista.CrearListaEnlazada[int]()
+	datosInt := []int{10, 20, 30, 40, 50}
+	testInsertarBorrarMedioConIterador(t, listaInt, datosInt)
+	listaString := TDALista.CrearListaEnlazada[string]()
+	datosString := []string{"Hola", "como", "estás", "todo", "bien"}
+	testInsertarBorrarMedioConIterador(t, listaString, datosString)
+}
+
+func testInsertarBorrarMedioConIterador[Type any](t *testing.T, lista TDALista.Lista[Type], datos []Type) {
+	iteradorExterno := lista.Iterador()
+	for i := 0; i < len(datos); i++ {
+		iteradorExterno.Insertar(datos[i])
+		require.Equal(t, iteradorExterno.VerActual(), iteradorExterno.Siguiente(), "El método siguiente devuelve correctamente el elemento actual antes de avanzar")
+	}
+
+	// La lista me queda 10 - 20 - 30 - 40 - 50
+
+	iteradorExterno = lista.Iterador() // apunto a 10
+
+	require.Equal(t, datos[0], iteradorExterno.Siguiente(), "El método siguiente sigue funcionando bien")
+	require.Equal(t, datos[1], iteradorExterno.Siguiente(), "El método siguiente sigue funcionando bien")
+
+	iteradorExterno.Insertar(datos[0]) // Me queda 10 - 20 - 10 - 30 - 40 - 50
+	require.Equal(t, datos[0], iteradorExterno.VerActual(), "El iterador sigue apuntando al elemento que recién inserté en el medio")
+	require.Equal(t, datos[0], iteradorExterno.Siguiente(), "El método siguiente sigue funcionando bien")
+	require.Equal(t, datos[2], iteradorExterno.Siguiente(), "El siguiente es el correcto")
+	iteradorExterno.Insertar(datos[1]) // Me queda 10 - 20 - 10 - 30 - 20 - 40 - 50
+	require.Equal(t, datos[1], iteradorExterno.VerActual(), "El iterador sigue apuntando al elemento que recién inserté en el medio")
+
+	// Borro
+	iteradorExterno = lista.Iterador() // apunto a 10
+	require.Equal(t, datos[0], iteradorExterno.Siguiente(), "El método siguiente sigue funcionando bien")
+	require.Equal(t, datos[1], iteradorExterno.Siguiente(), "El método siguiente sigue funcionando bien")
+	require.Equal(t, datos[0], iteradorExterno.VerActual(), "Apunto al elemento que quiero eliminar")
+	require.Equal(t, datos[0], iteradorExterno.Borrar(), "Elimino ok el elemento que puse en el medio")
+	require.Equal(t, datos[2], iteradorExterno.VerActual(), "El iterador apunta al siguiente del que recién eliminé")
+	require.Equal(t, datos[2], iteradorExterno.Siguiente(), "El método siguiente sigue funcionando bien")
+	require.Equal(t, datos[1], iteradorExterno.VerActual(), "Apunto al elemento que quiero eliminar")
+	require.Equal(t, datos[1], iteradorExterno.Borrar(), "Elimino ok el 2do elemento que puse en el medio")
+	require.Equal(t, datos[3], iteradorExterno.VerActual(), "El iterador apunta al siguiente del que recién eliminé")
+	require.Equal(t, datos[3], iteradorExterno.Siguiente(), "El método siguiente sigue funcionando bien")
 }
