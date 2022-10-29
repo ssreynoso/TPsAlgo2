@@ -2,9 +2,9 @@ package customTDAs
 
 import (
 	"fmt"
-	"main/errores"
-	"main/utils"
 	"os"
+	"rerepolez/errores"
+	"rerepolez/utils"
 )
 
 type listaPadrones struct {

@@ -1,8 +1,8 @@
 package votos
 
 import (
-	"main/TDAs"
-	"main/errores"
+	"rerepolez/TDAs"
+	"rerepolez/errores"
 )
 
 // Voto tiene guardada la información de un voto emitido, por cada tipo de voto posible.
@@ -57,6 +57,8 @@ func (votante *votanteImplementacion) Deshacer() error {
 		err := new(errores.ErrorNoHayVotosAnteriores)
 		return err
 	}
+
+	votante.movimientos.Desapilar()
 
 	return nil
 }

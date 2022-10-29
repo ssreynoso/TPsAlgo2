@@ -1,6 +1,6 @@
 package customTDAs
 
-import "main/votos"
+import "rerepolez/votos"
 
 type ListaPartidos interface {
 

@@ -2,17 +2,26 @@ package operaciones
 
 import (
 	"fmt"
-	"main/TDAs"
-	errores "main/errores"
-	"main/votos"
 	"os"
+	"rerepolez/TDAs"
+	"rerepolez/customTDAs"
+	errores "rerepolez/errores"
+	"rerepolez/votos"
 )
 
 func Deshacer(
 	colaVotantes TDAs.Cola[votos.Votante],
+	listaDNIsYaVotaron customTDAs.ListaDNIs,
 ) {
 	if colaVotantes.EstaVacia() {
 		err := new(errores.FilaVacia)
+		fmt.Fprintf(os.Stdout, "%s\n", err.Error())
+		return
+	}
+
+	if listaDNIsYaVotaron.PadronFraudulento(colaVotantes.VerPrimero().LeerDNI()) {
+		err := new(errores.ErrorVotanteFraudulento)
+		err.Dni = colaVotantes.Desencolar().LeerDNI()
 		fmt.Fprintf(os.Stdout, "%s\n", err.Error())
 		return
 	}

@@ -2,11 +2,11 @@ package operaciones
 
 import (
 	"fmt"
-	"main/TDAs"
-	"main/customTDAs"
-	errores "main/errores"
-	"main/votos"
 	"os"
+	"rerepolez/TDAs"
+	"rerepolez/customTDAs"
+	errores "rerepolez/errores"
+	"rerepolez/votos"
 	"strconv"
 )
 

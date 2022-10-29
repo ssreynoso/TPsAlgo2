@@ -1,83 +1,14 @@
-Inicio programa:
+Aclaraciones sobre la entrega:
+- Se utilizó radixsort utilizando un countingsort (con colas) interno para ordenar la lista de dnis que recibimos como input. Esto para poder realizar búsquedas binarias a la hora de verificar si un dni está incluido o no en el padrón.
 
-Recibo un archivo_lista (lista de postulados, etc) y archivo_padron (lista de padrones permitidos para votar)
+- Se utilizó una Pila interna en cada votante que guarde los votos realizados por este.
 
+- Se utilizó una Lista enlazada para poder llevar un seguimiento de qué padrones ya habían votado. En un principio se pensó en realizar un ordenamiento a medida que íbamos ingresando un padrón pero se decidió que era menos costoso utilizar una lista e ingresar en O(1) para luego realizar búsquedas en O(n)
 
+Pedimos disculpas por la demora en la entrega del trabajo y esperamos que esté todo ok.
 
+Por lo hablado con Martín entendemos que ante una posible reentrega el trabajo quedaría desaprobado pero si existe la posibilidad de corregirlo antes del lunes la tomaríamos con mucha gratitud. 
 
+Nos comprometemos a no entregar sobre la fecha límite los trabajos prácticos pendientes.
 
-Comando deshacer:
-
-Deshace la última operación de voto del votante actual. Es decir, ningún voto ya finalizado (ver siguiente comando) puede verse alterado por la aplicación de este comando. El voto completo del votante actual queda en el estado exactamente anterior a la última utilización del comando votar.
-
-Como para votar se utiliza una cola, las operaciones que sean de votar pueden apilar en una pila las operaciones para después, con el comando deshacer, desapilarlas y deshacer el voto y dejar todo como antes.
-
-No recibe ningún parámetro.
-
-Salida:
-    - OK                                    -> no se produjo ningún error.
-    - ERROR: Fila vacía                     -> no hay nadie esperando para votar.
-    - ERROR: Votante fraudulento: <NRO DNI> -> si el DNI de la persona votando ya emitió y finalizó su voto (ver fin-votar)
-    - ERROR: Sin voto a deshacer -> No hay nada que deshacer (el votante actual aún no realizó votaciones, o todas sus votaciones fueron ya deshechas)
-
-En caso de producirse el Error de votante fraudulento, se descarta el padrón de la fila. En caso de los demás errores, simplemente se espera por otro ingreso que sea correcto. En caso que se produzca más de un error a la vez, el error que se debe priorizar al que esté antes en este listado. Es decir, se debe validar en tal orden.
-
-fin-votar
-
-Termina el proceso de votación para el votante actual en la fila. Se emite su voto completo, considerando su alternativa elegida para Presidente, Gobernador e Intendente. Si no eligió alguna alternativa para uno o más tipos, se contarán como votos en blanco.
-
-Al finalizar el voto, se añadirán al conteo de las alternativas electas para Presidente, Gobernador e Intendente correspondientes, incluyendo el voto en blanco. En caso de haberse impugnado el voto, no se contará para ninguna, y simplemente se irá a un conteo de votos impugnados. En cuaquier caso, el votante dejará de estar en la fila, para que pueda votar el siguiente de la misma.
-
-Salida
-OK -> si no se produjo ningún error.
-ERROR: Fila vacía -> si no hay nadie esperando para votar.
-ERROR: Votante FRAUDULENTO -> <NRO DNI>: si el DNI de la persona votando ya emitió y finalizó su voto (ver fin-votar). Mismo a lo mencionado anteriormente respecto al número de DNI.
-
-
-Se puede ordenar el archivo de padrones con radix sort para después poder realizar búsquedas binarias para ver si un padrónestá o no
-
-
-
-[12345999, 43149193, 10231943, 12310454]
-
-n = 300000
-d = 8 = números en el DNI
-k = rango [0-9] = 10 números
-
-
-
-complejidad = O(8*(300000 + 10))
-
-
-
-0         1         2         3         4         5        6        7        8        9
-                              -3288313  16554084 
-73930740  20541111  78863112  46993703  90610784 
-
-73930740 20541111 78863112 46993703 -3288313 90610784 16554084
-
-0         1         2         3         4         5        6        7        8        9
-          -3288313
-          78863112                                                           16554084
-46993703  20541111                      73930740                             90610784
-
-46993703 20541111 78863112 -3288313 73930740 90610784 16554084
-
-
-
-
-
-
-
-
-
-46993703 20541111 78863112 -3288313 73930740 90610784 16554084
-
-ordenamientos en O(n)
-
-búsqueda en O(log n)
-
-O(n) + O(log n)
-
-
-O(n)
+Muchas gracias <3

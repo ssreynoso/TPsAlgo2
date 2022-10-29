@@ -2,11 +2,11 @@ package operaciones
 
 import (
 	"fmt"
-	"main/TDAs"
-	"main/customTDAs"
-	errores "main/errores"
-	"main/votos"
 	"os"
+	"rerepolez/TDAs"
+	"rerepolez/customTDAs"
+	errores "rerepolez/errores"
+	"rerepolez/votos"
 )
 
 func FinPrograma(
@@ -17,10 +17,8 @@ func FinPrograma(
 	if !colaVotantes.EstaVacia() {
 		err := new(errores.ErrorCiudadanosSinVotar)
 		fmt.Fprintf(os.Stdout, "%s\n", err.Error())
-		return
 	}
 
-	fmt.Fprintf(os.Stdout, "%s\n", "")
 	fmt.Fprintf(os.Stdout, "%s\n", "Presidente:")
 	listaPartidos.ImprimirResultados(votos.PRESIDENTE)
 

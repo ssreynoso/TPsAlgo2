@@ -3,12 +3,12 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"main/TDAs"
-	"main/customTDAs"
-	errores "main/errores"
-	"main/operaciones"
-	votos "main/votos"
 	"os"
+	"rerepolez/TDAs"
+	"rerepolez/customTDAs"
+	errores "rerepolez/errores"
+	"rerepolez/operaciones"
+	votos "rerepolez/votos"
 	"strings"
 )
 
@@ -40,6 +40,7 @@ func main() {
 	var contadorInpugnados int
 
 	// Lista de personas que ya votaron
+	listaDNIsYaVotaron := customTDAs.CrearListaDNIsYaVotaron()
 
 	// Leo input del usuario
 	s := bufio.NewScanner(os.Stdin)
@@ -47,7 +48,7 @@ func main() {
 		if s.Text() == "" {
 			break
 		}
-		menu(s.Text(), listaPartidos, listaPadrones, colaVotantes, &contadorInpugnados)
+		menu(s.Text(), listaPartidos, listaPadrones, colaVotantes, &contadorInpugnados, listaDNIsYaVotaron)
 	}
 
 	operaciones.FinPrograma(colaVotantes, listaPartidos, &contadorInpugnados)
@@ -64,6 +65,7 @@ func menu(
 	listaPadrones customTDAs.ListaPadrones,
 	colaVotantes TDAs.Cola[votos.Votante],
 	contadorInpugnados *int,
+	listaDNIsYaVotaron customTDAs.ListaDNIs,
 ) {
 	params := strings.Split(input, " ") // Comando a evaluar
 	cmd := params[0]
@@ -73,11 +75,11 @@ func menu(
 	case "ingresar":
 		operaciones.Ingresar(data, listaPadrones, colaVotantes)
 	case "votar":
-		operaciones.Votar(data, listaPartidos, colaVotantes)
+		operaciones.Votar(data, listaPartidos, colaVotantes, listaDNIsYaVotaron)
 	case "deshacer":
-		operaciones.Deshacer(colaVotantes)
+		operaciones.Deshacer(colaVotantes, listaDNIsYaVotaron)
 	case "fin-votar":
-		operaciones.FinVotar(colaVotantes, listaPartidos, contadorInpugnados)
+		operaciones.FinVotar(colaVotantes, listaPartidos, contadorInpugnados, listaDNIsYaVotaron)
 	default:
 		fmt.Fprintf(os.Stdout, "%s\n", fmt.Sprintf("ERROR: [%s] el parámetro ingresado no es válido.", cmd))
 	}

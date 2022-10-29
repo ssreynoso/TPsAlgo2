@@ -2,9 +2,9 @@ package customTDAs
 
 import (
 	"fmt"
-	"main/utils"
-	"main/votos"
 	"os"
+	"rerepolez/utils"
+	"rerepolez/votos"
 )
 
 type listaPartidos struct {
@@ -42,7 +42,7 @@ func (lista *listaPartidos) SumarVoto(voto votos.Voto) error {
 }
 
 func (lista *listaPartidos) ValidarNumeroLista(numeroLista int) bool {
-	return (numeroLista >= 0 && numeroLista <= len(lista.partidos))
+	return (numeroLista >= 0 && numeroLista <= (len(lista.partidos)-1))
 }
 
 func (lista *listaPartidos) ImprimirResultados(tipo votos.TipoVoto) {

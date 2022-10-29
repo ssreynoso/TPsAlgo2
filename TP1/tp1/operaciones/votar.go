@@ -2,11 +2,11 @@ package operaciones
 
 import (
 	"fmt"
-	"main/TDAs"
-	"main/customTDAs"
-	errores "main/errores"
-	"main/votos"
 	"os"
+	"rerepolez/TDAs"
+	"rerepolez/customTDAs"
+	errores "rerepolez/errores"
+	"rerepolez/votos"
 	"strconv"
 )
 
@@ -14,6 +14,7 @@ func Votar(
 	data []string,
 	listaPartidos customTDAs.ListaPartidos,
 	colaVotantes TDAs.Cola[votos.Votante],
+	listaDNIsYaVotaron customTDAs.ListaDNIs,
 ) {
 	if len(data) < 2 {
 		err := new(errores.ErrorParametros)
@@ -49,6 +50,13 @@ func Votar(
 	// Valido que exista el número de lista
 	if err != nil || !listaPartidos.ValidarNumeroLista(numeroLista) {
 		err := new(errores.ErrorAlternativaInvalida)
+		fmt.Fprintf(os.Stdout, "%s\n", err.Error())
+		return
+	}
+
+	if listaDNIsYaVotaron.PadronFraudulento(colaVotantes.VerPrimero().LeerDNI()) {
+		err := new(errores.ErrorVotanteFraudulento)
+		err.Dni = colaVotantes.Desencolar().LeerDNI()
 		fmt.Fprintf(os.Stdout, "%s\n", err.Error())
 		return
 	}
