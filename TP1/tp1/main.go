@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"rerepolez/TDAs"
+	"rerepolez/cola"
 	"rerepolez/customTDAs"
 	errores "rerepolez/errores"
 	"rerepolez/operaciones"
@@ -35,7 +35,7 @@ func main() {
 		return
 	}
 
-	colaVotantes := TDAs.CrearColaEnlazada[votos.Votante]()
+	colaVotantes := cola.CrearColaEnlazada[votos.Votante]()
 
 	var contadorInpugnados int
 
@@ -63,7 +63,7 @@ func menu(
 	input string,
 	listaPartidos customTDAs.ListaPartidos,
 	listaPadrones customTDAs.ListaPadrones,
-	colaVotantes TDAs.Cola[votos.Votante],
+	colaVotantes cola.Cola[votos.Votante],
 	contadorInpugnados *int,
 	listaDNIsYaVotaron customTDAs.ListaDNIs,
 ) {

@@ -3,14 +3,14 @@ package operaciones
 import (
 	"fmt"
 	"os"
-	"rerepolez/TDAs"
+	"rerepolez/cola"
 	"rerepolez/customTDAs"
 	errores "rerepolez/errores"
 	"rerepolez/votos"
 )
 
 func FinPrograma(
-	colaVotantes TDAs.Cola[votos.Votante],
+	colaVotantes cola.Cola[votos.Votante],
 	listaPartidos customTDAs.ListaPartidos,
 	contadorInpugnados *int,
 ) {

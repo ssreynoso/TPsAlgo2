@@ -1,14 +1,14 @@
 package customTDAs
 
-import "rerepolez/TDAs"
+import "rerepolez/lista"
 
 type listaDNIsYaVotaron struct {
-	dnis TDAs.Lista[int]
+	dnis lista.Lista[int]
 }
 
 func CrearListaDNIsYaVotaron() ListaDNIs {
 	nuevaLista := new(listaDNIsYaVotaron)
-	nuevaLista.dnis = TDAs.CrearListaEnlazada[int]()
+	nuevaLista.dnis = lista.CrearListaEnlazada[int]()
 	return nuevaLista
 }
 

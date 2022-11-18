@@ -3,14 +3,14 @@ package operaciones
 import (
 	"fmt"
 	"os"
-	"rerepolez/TDAs"
+	"rerepolez/cola"
 	"rerepolez/customTDAs"
 	errores "rerepolez/errores"
 	"rerepolez/votos"
 )
 
 func Deshacer(
-	colaVotantes TDAs.Cola[votos.Votante],
+	colaVotantes cola.Cola[votos.Votante],
 	listaDNIsYaVotaron customTDAs.ListaDNIs,
 ) {
 	if colaVotantes.EstaVacia() {

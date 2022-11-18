@@ -3,7 +3,7 @@ package operaciones
 import (
 	"fmt"
 	"os"
-	"rerepolez/TDAs"
+	"rerepolez/cola"
 	"rerepolez/customTDAs"
 	errores "rerepolez/errores"
 	"rerepolez/votos"
@@ -13,7 +13,7 @@ import (
 func Votar(
 	data []string,
 	listaPartidos customTDAs.ListaPartidos,
-	colaVotantes TDAs.Cola[votos.Votante],
+	colaVotantes cola.Cola[votos.Votante],
 	listaDNIsYaVotaron customTDAs.ListaDNIs,
 ) {
 	if len(data) < 2 {

@@ -44,7 +44,7 @@ type IteradorLista[T any] interface {
 	// En caso contrario devuelve false; es decir, estamos en el último elemento de la lista.
 	HaySiguiente() bool
 
-	// Avanza de posición en el iterador y devuelve el valor de ese nuevo elemento al que ahora apunta.
+	// Avanza de posición en el iterador y devuelve el valor del elemento actual antes de avanzar.
 	// Si el iterador ya ha iterado todos los elementos, entra en pánico con un mensaje "El iterador termino de iterar".
 	Siguiente() T
 

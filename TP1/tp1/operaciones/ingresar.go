@@ -3,7 +3,7 @@ package operaciones
 import (
 	"fmt"
 	"os"
-	"rerepolez/TDAs"
+	"rerepolez/cola"
 	"rerepolez/customTDAs"
 	errores "rerepolez/errores"
 	"rerepolez/votos"
@@ -13,7 +13,7 @@ import (
 func Ingresar(
 	data []string,
 	listaPadrones customTDAs.ListaPadrones,
-	colaVotantes TDAs.Cola[votos.Votante],
+	colaVotantes cola.Cola[votos.Votante],
 ) {
 	if len(data) < 1 {
 		err := new(errores.ErrorParametros)

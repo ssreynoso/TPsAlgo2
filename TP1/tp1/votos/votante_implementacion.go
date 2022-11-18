@@ -1,8 +1,8 @@
 package votos
 
 import (
-	"rerepolez/TDAs"
 	"rerepolez/errores"
+	"rerepolez/pila"
 )
 
 // Voto tiene guardada la información de un voto emitido, por cada tipo de voto posible.
@@ -21,13 +21,13 @@ type movimiento struct {
 
 type votanteImplementacion struct {
 	DNI         int
-	movimientos TDAs.Pila[*movimiento]
+	movimientos pila.Pila[*movimiento]
 }
 
 func CrearVotante(dni int) Votante {
 	nuevoVotante := new(votanteImplementacion)
 	nuevoVotante.DNI = dni
-	nuevoVotante.movimientos = TDAs.CrearPilaDinamica[*movimiento]()
+	nuevoVotante.movimientos = pila.CrearPilaDinamica[*movimiento]()
 	return nuevoVotante
 }
 

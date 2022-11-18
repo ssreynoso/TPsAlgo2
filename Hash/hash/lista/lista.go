@@ -1,0 +1,1 @@
+/home/sreynoso/Desktop/Dev/Go/Algoritmos y programación 2/Tps Algo2/Lista/lista/lista.go

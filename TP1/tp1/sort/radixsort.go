@@ -1,6 +1,6 @@
 package sort
 
-import "rerepolez/TDAs"
+import "rerepolez/cola"
 
 // Este Radix Sort utiliza countingsort con colas internamente
 
@@ -12,13 +12,13 @@ func RadixSort(arreglo []string, longitud int) []string {
 	)
 	// Los valores que recibo tiene tamaño 8
 	var (
-		counting  [CANTIDAD_COUNTING]TDAs.Cola[string]
+		counting  [CANTIDAD_COUNTING]cola.Cola[string]
 		character byte
 	)
 
 	// Inicializo todas las colas
 	for i := 0; i < CANTIDAD_COUNTING; i++ {
-		counting[i] = TDAs.CrearColaEnlazada[string]()
+		counting[i] = cola.CrearColaEnlazada[string]()
 	}
 
 	arregloOrdenado := arreglo
