@@ -6,10 +6,21 @@ import (
 )
 
 type Posts interface {
+
+	// Recibe un usuario autor del nuevo post, el contenido del post,
+	// crea un nuevo post, lo agrega al diccionario de posts y lo devuelve.
 	Agregar(Usuario, string) Post
+
+	// Recibe el id de un post y devuelve true si el post existe; en caso contrario, false.
 	Pertenece(string) bool
+
+	// Recibe el id de un usuario, el id de un post y guarda el like de ese usuario en ese post.
 	GuardarLike(string, string)
+
+	// Recibe el id de un post y devuelve la cantidad de likes que este tiene.
 	GetCantidadLikes(string) int
+
+	// Recibe el id de un post y muestra sus likes.
 	MostrarLikes(string)
 }
 

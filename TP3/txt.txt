@@ -1,0 +1,24 @@
+- Necesito obtener el camino mínimo desde y hacia distintas sedes del mundial.
+-> Dikjstra y reconstruir camino
+
+- Exportar algún tipo de archivo que permita visualizar el recorrido a hacer.
+-> Graficar en archivo .kml
+
+- Obtener un itinerario de viaje para optimizar la experiencia del mismo donde no importe la distancia entre sedes.
+-> Recorrido BFS? DFS? Con respecto a qué es la experiencia que quiere tener el triplejueputa
+
+- Obtener un recorrido que recorra todas las rutas entre sedes, exactamente una vez.
+
+
+- El recorrido anterior debe terminar donde comenzó
+
+
+- Obtener un Árbol de Tendido Mínimo para calcular la ruta deseada para Lorena.
+-> Utilizar algoritmo de árbol de tendido mínimo
+
+
+
+
+
+
+

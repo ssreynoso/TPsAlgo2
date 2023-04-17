@@ -9,11 +9,24 @@ import (
 )
 
 type Post interface {
+
+	// GuardarLike recibe un usuario y lo agrega al ABB de likes.
 	GuardarLike(string)
+
+	// MostrarLikes imprime en el stdout la cantidad de likes que tiene el post e
+	// imprime a todos los usuarios que le dieron like ordenados alfabéticamente
 	MostrarLikes()
+
+	// CantidadLikes devuelve la cantidad de likes que tiene el post
 	CantidadLikes() int
+
+	// GetUsuario devuelve el TDA Usuario del usuario que publicó el post
 	GetUsuario() Usuario
+
+	// GetFecha devuelve la fecha en la que se publicó el post
 	GetFecha() time.Time
+
+	// Información imprime en el stdout el id, usuario y la cantidad de likes del post
 	Informacion()
 }
 
@@ -44,9 +57,6 @@ func (p post) GetFecha() time.Time {
 }
 
 func (p *post) GuardarLike(usuario string) {
-	if p.likes.Pertenece(usuario) {
-		return
-	}
 	p.likes.Guardar(usuario, usuario)
 }
 

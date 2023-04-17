@@ -6,9 +6,16 @@ import (
 )
 
 type Usuarios interface {
+
+	// Pertenece devuelve true si el usuario existe; en caso contrario, false.
 	Pertenece(string) bool
+
+	// NuevoPost recibe el id del usuario autor del post (string) y
+	// guarda este nuevo post en el feed de cada uno de los usuarios en el sistema.
 	NuevoPost(string, Post)
-	Login(string) Usuario
+
+	// Devuelve el TDA Usuario de un usuario dado de alta.
+	GetUsuario(string) Usuario
 }
 
 type diccionarioUsuarios struct {
@@ -47,6 +54,6 @@ func (d diccionarioUsuarios) NuevoPost(autor string, post Post) {
 	d.usuarios.Iterar(guardarPostEnCadaUsuario)
 }
 
-func (d diccionarioUsuarios) Login(id string) Usuario {
+func (d diccionarioUsuarios) GetUsuario(id string) Usuario {
 	return d.usuarios.Obtener(id)
 }

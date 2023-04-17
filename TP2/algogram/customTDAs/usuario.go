@@ -6,10 +6,20 @@ import (
 )
 
 type Usuario interface {
+
+	// AgregarPostAlFeed recibe un puntero a un post y lo encola en el feed.
 	AgregarPostAlFeed(*Post)
+
+	// GetID devuelve el id de un usuario.
 	GetID() string
+
+	// Devuelve true si quedan posts para ver; en caso contrario, false.
 	HayPostsParaVer() bool
+
+	// VerSiguientePost devuelve el puntero al post con mayor prioridad en el feed.
 	VerSiguientePost() *Post
+
+	// Devuelve la posición del usuario en el archivo de usuarios proveído al inicio del programa.
 	GetIndex() int
 }
 

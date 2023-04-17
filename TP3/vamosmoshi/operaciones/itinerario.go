@@ -1,17 +1,18 @@
 package operaciones
 
 import (
-	"algogram/customTDAs"
-	"algogram/errores"
 	"fmt"
 	"os"
-	"strings"
+	TDAGrafo "vamosmoshi/TDAs/Grafo"
+	TDAHash "vamosmoshi/TDAs/Hash"
+	customTDAs "vamosmoshi/customTDAs"
+	"vamosmoshi/errores"
 )
 
-func Login(
+func Itinerario(
 	input []string,
-	usuariosRegistrados customTDAs.Usuarios,
-	usuario_sesion *customTDAs.Usuario,
+	grafoCiudades TDAGrafo.Grafo,
+	hashCiudades TDAHash.Diccionario[string, customTDAs.Ciudad],
 ) {
 	if *usuario_sesion != nil {
 		error := new(errores.ErrorYaHayLoggeado)
